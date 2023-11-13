@@ -1,0 +1,418 @@
+---
+title: "Data_analysis"
+output:
+  html_document:
+    toc: no
+    df_print: paged
+---
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(viridis)
+library(networkD3)
+library(mosaic)
+```
+
+```{r}
+open_payment <- read.csv("data.csv")
+```
+
+```{r}
+open_payment$covered_recipient_first_name <- paste(open_payment$covered_recipient_first_name, open_payment$covered_recipient_middle_name,open_payment$covered_recipient_last_name,open_payment$covered_recipient_name_suffix )
+open_payment$date_of_payment <- mdy(open_payment$date_of_payment)
+open_payment$payment_publication_date <- mdy(open_payment$payment_publication_date)
+```
+
+```{r}
+open_payment <- subset (open_payment, select = -(covered_recipient_middle_name:covered_recipient_name_suffix))
+```
+
+```{r}
+open_payment <- open_payment|>
+  rename("covered_recipient_full_name"= "covered_recipient_first_name")|>
+  mutate(covered_recipient_full_name = tolower(covered_recipient_full_name)) 
+```
+
+```{r}
+highest_doctortype <- open_payment|>
+  filter(covered_recipient_primary_type_1!="")|>
+  group_by(covered_recipient_primary_type_1)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars,n=n()))|>
+  arrange(sum)|>
+  rename("Covered Recipient Primary Type" = covered_recipient_primary_type_1)|>
+  rename("Total Amount Of Payment, $" = sum)
+highest_doctortype
+```
+
+```{r}
+dentist <- open_payment|>
+  filter(covered_recipient_primary_type_1 == "Doctor of Dentistry")|>
+  select(change_type,covered_recipient_full_name, recipient_city,covered_recipient_specialty_1,submitting_applicable_manufacturer_or_applicable_gpo_name,applicable_manufacturer_or_applicable_gpo_making_payment_name,applicable_manufacturer_or_applicable_gpo_making_payment_country,total_amount_of_payment_usdollars:nature_of_payment_or_transfer_of_value)
+```
+
+```{r}
+dentist_analysis <- dentist |>
+    summarize(sum = sum(total_amount_of_payment_usdollars),
+              min = min(total_amount_of_payment_usdollars),
+              IQR = IQR(total_amount_of_payment_usdollars),
+              median = median(total_amount_of_payment_usdollars),
+              mean = mean(total_amount_of_payment_usdollars),
+              max = max(total_amount_of_payment_usdollars),
+              n = n())|>
+    rename("Times Of Payment"=n,"Median, $" = median,"Total Amount Of Payment, $" = sum,"Min, $"=min,"Mean, $"=mean, "IQR, $"=IQR,"Max, $"=max,)
+dentist_analysis
+```
+```{r}
+all_analysis <- open_payment |>
+  summarize(sum = sum(total_amount_of_payment_usdollars),
+            min = min(total_amount_of_payment_usdollars),
+            IQR = IQR(total_amount_of_payment_usdollars),
+            mean = mean(total_amount_of_payment_usdollars),
+            median = median(total_amount_of_payment_usdollars),
+            max = max(total_amount_of_payment_usdollars),
+            n = n())|>
+    rename("Times Of Payment"=n,"Median, $" = median,"Total Amount Of Payment, $" = sum,"Min, $"=min,"Mean, $"=mean, "IQR, $"=IQR,"Max, $"=max,)
+all_analysis
+```
+
+```{r}
+dentist_specialty_analysis <- dentist |>
+  filter(covered_recipient_specialty_1!="")|>
+  group_by(covered_recipient_specialty_1)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars),
+            min = min(total_amount_of_payment_usdollars),
+            IQR = IQR(total_amount_of_payment_usdollars),
+            median = median(total_amount_of_payment_usdollars),
+            max = max(total_amount_of_payment_usdollars),
+            n = n())|>
+  rename("Times Of Payment"=n,"Covered Recipient Specialty" = covered_recipient_specialty_1,"Total Amount Of Payment, $" = sum,"Min, $"=min,"Median, $"=median, "IQR, $"=IQR,"Max, $"=max,)
+dentist_specialty_analysis
+```
+
+```{r}
+ggplot(dentist, aes(x=reorder(covered_recipient_specialty_1,
+                              total_amount_of_payment_usdollars,
+                              median,
+                              decreasing = TRUE),
+                    y=total_amount_of_payment_usdollars))+
+  geom_boxplot()+
+  facet_wrap(~form_of_payment_or_transfer_of_value)+
+  scale_y_continuous(labels = scales::dollar)+
+  coord_flip()+
+  scale_y_log10()+
+  labs(title = "Relationship Between Dentists' Specialty and Total Amount of Payment",
+       x = "Covered Recipient Specialty",
+       y = "Total Amount Of Payment, $")
+```
+
+```{r}
+covered_recipient_two <- dentist|>
+  mutate(covered_recipient_specialty_1 = case_when(grepl("Allopathic", covered_recipient_specialty_1)~ "allopathic & osteopathic physicians",
+        grepl("Dental Providers", covered_recipient_specialty_1, ignore.case = TRUE)~ "dental providers"))|>
+  drop_na()
+```
+
+```{r}
+ggplot(covered_recipient_two, aes(x=reorder(covered_recipient_specialty_1,
+                              total_amount_of_payment_usdollars,
+                              median,
+                              decreasing = TRUE),
+                    y=total_amount_of_payment_usdollars))+
+  geom_boxplot()+
+  #facet_wrap(~form_of_payment_or_transfer_of_value)+
+  scale_y_continuous(labels = scales::dollar)+
+  coord_flip()+
+  scale_y_log10()+
+  
+  labs(title = "Relationship Between Dentists' Specialty And Total Amount Of Payment",
+       x = "Covered Recipient Specialty",
+       y = "Total Amount Of Payment, $")+
+  theme(title = element_text(size = 9))
+```
+
+```{r}
+#states <- map_data("state")
+#ggplot(data=states) + 
+  #geom_polygon(aes(x=long, y=lat, group=group), colour="black", fill='white', size=.2) +
+  #scale_fill_gradient2(low = "blue", mid="white", high = "red", name="total_amount_of_payment_usdollars")
+  #coord_fixed(1.3) + theme_void()
+```
+
+```{r}
+company_recipient <- dentist |>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum=sum(total_amount_of_payment_usdollars))|>
+  arrange(desc(sum))
+```
+
+```{r}
+company <- dentist |>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars),
+            min = min(total_amount_of_payment_usdollars),
+            IQR = IQR(total_amount_of_payment_usdollars),
+            median = median(total_amount_of_payment_usdollars),
+            max = max(total_amount_of_payment_usdollars),
+            n = n())|>
+  arrange(desc(sum))|>
+  rename("Submitting Manufacturer Or GPO's Name"=submitting_applicable_manufacturer_or_applicable_gpo_name, 
+         "Sum, $"=sum,
+         "Min, $"=min,
+         "IQR, $"=IQR,
+         "Median, $"=median,
+         "Max, $"=max,
+         "Times Of Payment"=n)
+company
+```
+
+```{r}
+top_recipient <- dentist|>
+  group_by(covered_recipient_full_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars))|>
+  arrange(desc(sum))
+top_recipient
+```
+
+```{r}
+company_recipient1 <- dentist|>
+  filter(submitting_applicable_manufacturer_or_applicable_gpo_name %in% c("Zimmer Biomet Holding, Inc.", "Straumann USA LLC","Strategic Dentistry LLC", "Peter Brasseler Holdings, LLC", "PATTERSON COMPANIES, INC.","Align Technology, Inc.","	Ivoclar Vivadent, Inc.","A-dec, Inc.","Dentium Co., Ltd","KLS-Martin L.P."))|>
+  select(covered_recipient_full_name,total_amount_of_payment_usdollars,submitting_applicable_manufacturer_or_applicable_gpo_name)
+```
+
+```{r}
+ali_a_nasseh<-company_recipient1|>
+  filter(covered_recipient_full_name == "ali a nasseh ")|>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars))|>
+  mutate(physician_name="Ali A Nasseh")
+anne_l_koch<-company_recipient1|>
+  filter(covered_recipient_full_name == "anne l koch "|covered_recipient_full_name == "anne koch ")|>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars))|>
+  mutate(physician_name="Anne L Koch")
+leslie_fang<-company_recipient1|>
+  filter(covered_recipient_full_name == "leslie  fang ")|>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars))|>
+  mutate(physician_name="Leslie Fang")
+myron_nevins<-company_recipient1|>
+  filter(covered_recipient_full_name == "myron  nevins ")|>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars))|>
+  mutate(physician_name="Myron Nevins")
+paul_fugazzotto<-company_recipient1|>
+  filter(covered_recipient_full_name == "paul  fugazzotto ")|>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars))|>
+  mutate(physician_name="Paul Fugazzotto")
+mohamed_a_hakim<-company_recipient1|>
+  filter(covered_recipient_full_name == "mohamed a hakim ")|>
+  group_by(submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarize(sum = sum(total_amount_of_payment_usdollars))|>
+  mutate(physician_name="Mohamed A Hakim")
+```
+
+```{r}
+company_recipient2 <- rbind(ali_a_nasseh,anne_l_koch,leslie_fang,myron_nevins,paul_fugazzotto,mohamed_a_hakim)
+```
+
+```{r}
+ggplot(company_recipient2, aes(x = physician_name, y = submitting_applicable_manufacturer_or_applicable_gpo_name,size=sum))+
+  geom_count()+
+  scale_size_continuous(labels = scales::comma)+
+  labs(title = "Dentists-Industry Financial Relationship",
+       x = "Physicians",
+       y = "Drug And Device Companies",
+       size = "Sum Payments, $")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 45))
+```
+```{r}
+com_rec <- dentist|>
+  select(covered_recipient_full_name, submitting_applicable_manufacturer_or_applicable_gpo_name, total_amount_of_payment_usdollars)|>
+  group_by(covered_recipient_full_name, submitting_applicable_manufacturer_or_applicable_gpo_name)|>
+  summarise(total = sum(total_amount_of_payment_usdollars))
+```
+
+```{r}
+top_recipient <- 
+  rownames_to_column(top_recipient, var = "covered_recipient_rank")
+```
+
+```{r}
+company_recipient <- 
+  rownames_to_column(company_recipient, var = "company_rank")
+```
+
+```{r}
+com_rec <- com_rec |>
+  left_join(top_recipient, by = c("covered_recipient_full_name" = "covered_recipient_full_name" ))
+```
+
+```{r}
+com_rec <- com_rec |>
+  left_join(company_recipient, by = c("submitting_applicable_manufacturer_or_applicable_gpo_name" = "submitting_applicable_manufacturer_or_applicable_gpo_name" ))
+com_rec <- com_rec[-(5:7),]
+```
+
+```{r}
+com_rec_plot <- ggplot(data = com_rec, 
+                       aes(y = covered_recipient_rank, 
+                           x = company_rank,
+                           size = total)) +
+  geom_point()
+com_rec_plot
+```
+
+
+```{r}
+dentist_nature <- dentist |>
+  select(total_amount_of_payment_usdollars, nature_of_payment_or_transfer_of_value)|>
+  group_by(nature_of_payment_or_transfer_of_value)|>
+  summarize(count = n(),
+            sum = sum(total_amount_of_payment_usdollars))|>
+  arrange(desc(sum))|>
+  select(nature_of_payment_or_transfer_of_value,sum,count)
+  #rename("Sum payments, $" = sum,
+         #"Payment type"=nature_of_payment_or_transfer_of_value)
+```
+
+```{r}
+dentist_nature_zoom <- dentist_nature[dentist_nature$sum <= 1200000, ]        
+dentist_nature_zoom$zoom <- "zoom"
+dentist_nature_extended <- dentist_nature
+dentist_nature_extended$zoom <- "all"
+dentist_nature_extended <- rbind(dentist_nature_extended, dentist_nature_zoom)
+dentist_nature_extended_filter <- dentist_nature_extended|>
+  filter(zoom == "zoom")
+```
+
+```{r}
+my.labels <- c("Royalty or License",
+               "Gift",
+               "Food and Beverage",
+               "Honoraria",
+               "Education",
+               "Compensation-certified\n continuing program",
+               "Charitable Contribution",
+               "Consulting fee",
+               "Grant",
+               "Compensation-non-accredited program",
+               "Compensation-other venues",
+               "Travel and Lodging",
+               "Entertainment") 
+
+ggplot(dentist_nature_extended, 
+       aes(x = fct_reorder(nature_of_payment_or_transfer_of_value, sum, .desc = TRUE), y = sum, fill = count))+
+  coord_flip()+
+  scale_x_discrete(labels= my.labels)+
+  scale_y_continuous(labels = scales::comma)+
+  labs(title = "Relationship Between Dentists' Paid Money And Nature Of Payment Or Transfer Of Value",
+       x = "Payment Type",
+       fill = "Number Of Payments",
+       y = "Sum Payments, $")+
+  theme(axis.text.y = element_text(size = 5))+
+  theme(axis.text.x = element_text(size = 5))+
+  geom_col()+
+  facet_wrap(~ zoom, scales = "free_x",nrow = 2)+
+  theme(title = element_text(size = 7))
+  #theme(axis.text.y =element_blank(),
+        #axis.ticks.y = element_blank())+
+  #theme(legend.position = "bottom")+
+  #guides(fill = guide_colorbar(barwidth = 10, barheight = 0.5))
+```
+
+```{r}
+date<- dentist|>
+  group_by(date_of_payment)|>
+  summarize(sum=sum(total_amount_of_payment_usdollars))
+```
+
+```{r}
+ggplot(date, aes(x=date_of_payment, y=sum)) +
+  geom_line() +
+  labs(title = "Total Payment In 2022 ",
+       x = "date of payment")
+```
+
+
+```{r}
+dentist <- dentist|>
+  mutate(recipient_city = tolower(recipient_city))
+```
+
+
+```{r}
+num<-dentist|>
+  group_by(recipient_city)|>
+  summarize(n=n(),sum = sum(total_amount_of_payment_usdollars))|>
+  arrange(desc(sum))
+```
+
+```{r}
+num_top<-num|>
+  select(recipient_city,sum)|>
+  head()
+```
+
+```{r}
+library(sf)
+library(USAboundaries)
+```
+
+```{r}
+map<-tibble(recipient_city = c("Boston", "West Yarmouth","Cambridge","Swampscott","Milton","Revere"),
+            sum = c("1051149.08", "326774.44","70231.09","41380.15","25416.10","19276.42"),
+            lng = c("-71.06051","-70.24113","-71.10562","-70.91715","-71.06557","-71.01199"),
+            lan = c("42.35543","41.65011","42.37510","42.46992","42.25014","42.40843"))
+```
+
+```{r}
+map_sf <- map |>
+  st_as_sf(coords = c("lng", "lan"), crs = 4326)
+map_sf
+```
+```{r}
+# Obtain a map of Massachusetts counties from the USAboundaries package
+MA_counties <- 
+  USAboundaries::us_counties(resolution = "low", states = c("massachusetts")) |> 
+  select(-state_name)
+```
+
+```{r}
+ggplot() +
+  geom_sf(data = MA_counties) +
+  geom_sf(data = map_sf, aes(color = sum)) 
+```
+```{r}
+library(leaflet)
+```
+
+```{r}
+map_sf$sum = as.numeric(map_sf$sum)
+glimpse(map_sf)
+```
+
+```{r}
+map_pal <- colorNumeric(palette = "RdYlBu",
+                        domain = map_sf|> pull(sum))
+```
+
+```{r}
+leaflet()|>
+  addTiles()|>
+  addCircles(data = map_sf,
+             color = ~ map_pal(sum),
+             radius = 4000,
+             weight = 5,
+             fillOpacity = 0.5
+             )|>
+  addLegend(position = "topright", pal = map_pal, values = map_sf$sum, title = "Sum payments, $")
+```
+

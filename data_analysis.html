@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data_analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="data_analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="data_analysis_files/libs/quarto-html/quarto.js"></script>
+<script src="data_analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="data_analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="data_analysis_files/libs/quarto-html/anchor.min.js"></script>
+<link href="data_analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="data_analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="data_analysis_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="data_analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="data_analysis_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="data_analysis_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="data_analysis_files/libs/jquery-1.12.4/jquery.min.js"></script>
+<link href="data_analysis_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="data_analysis_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="data_analysis_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="data_analysis_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="data_analysis_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="data_analysis_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="data_analysis_files/libs/leaflet-binding-2.1.1/leaflet.js"></script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data_analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>open_payment <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>open_payment<span class="sc">$</span>covered_recipient_first_name <span class="ot">&lt;-</span> <span class="fu">paste</span>(open_payment<span class="sc">$</span>covered_recipient_first_name, open_payment<span class="sc">$</span>covered_recipient_middle_name,open_payment<span class="sc">$</span>covered_recipient_last_name,open_payment<span class="sc">$</span>covered_recipient_name_suffix )</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>open_payment<span class="sc">$</span>date_of_payment <span class="ot">&lt;-</span> <span class="fu">mdy</span>(open_payment<span class="sc">$</span>date_of_payment)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>open_payment<span class="sc">$</span>payment_publication_date <span class="ot">&lt;-</span> <span class="fu">mdy</span>(open_payment<span class="sc">$</span>payment_publication_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>open_payment <span class="ot">&lt;-</span> <span class="fu">subset</span> (open_payment, <span class="at">select =</span> <span class="sc">-</span>(covered_recipient_middle_name<span class="sc">:</span>covered_recipient_name_suffix))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>open_payment <span class="ot">&lt;-</span> open_payment<span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"covered_recipient_full_name"</span><span class="ot">=</span> <span class="st">"covered_recipient_first_name"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">covered_recipient_full_name =</span> <span class="fu">tolower</span>(covered_recipient_full_name)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>highest_doctortype <span class="ot">&lt;-</span> open_payment<span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_primary_type_1<span class="sc">!=</span><span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(covered_recipient_primary_type_1)<span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars,<span class="at">n=</span><span class="fu">n</span>()))<span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sum)<span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Covered Recipient Primary Type"</span> <span class="ot">=</span> covered_recipient_primary_type_1)<span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Total Amount Of Payment, $"</span> <span class="ot">=</span> sum)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>highest_doctortype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  `Covered Recipient Primary Type` `Total Amount Of Payment, $`
+  &lt;chr&gt;                                                   &lt;dbl&gt;
+1 Chiropractor                                            1610.
+2 Doctor of Optometry                                   105056.
+3 Doctor of Podiatric Medicine                          276067.
+4 Doctor of Osteopathy                                  592652.
+5 Doctor of Dentistry                                  1893633.
+6 Medical Doctor                                      47857823.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dentist <span class="ot">&lt;-</span> open_payment<span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_primary_type_1 <span class="sc">==</span> <span class="st">"Doctor of Dentistry"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(change_type,covered_recipient_full_name, recipient_city,covered_recipient_specialty_1,submitting_applicable_manufacturer_or_applicable_gpo_name,applicable_manufacturer_or_applicable_gpo_making_payment_name,applicable_manufacturer_or_applicable_gpo_making_payment_country,total_amount_of_payment_usdollars<span class="sc">:</span>nature_of_payment_or_transfer_of_value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dentist_analysis <span class="ot">&lt;-</span> dentist <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">min =</span> <span class="fu">min</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">IQR =</span> <span class="fu">IQR</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">median =</span> <span class="fu">median</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">mean =</span> <span class="fu">mean</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">max =</span> <span class="fu">max</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> <span class="fu">n</span>())<span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">"Times Of Payment"</span><span class="ot">=</span>n,<span class="st">"Median, $"</span> <span class="ot">=</span> median,<span class="st">"Total Amount Of Payment, $"</span> <span class="ot">=</span> sum,<span class="st">"Min, $"</span><span class="ot">=</span>min,<span class="st">"Mean, $"</span><span class="ot">=</span>mean, <span class="st">"IQR, $"</span><span class="ot">=</span>IQR,<span class="st">"Max, $"</span><span class="ot">=</span>max,)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>dentist_analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Total Amount Of Payment, $ Min, $  IQR, $ Median, $  Mean, $ Max, $
+1                    1888467   0.45 67.3175      37.5 365.5569 109432
+  Times Of Payment
+1             5166</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>all_analysis <span class="ot">&lt;-</span> open_payment <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">IQR =</span> <span class="fu">IQR</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())<span class="sc">|&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">"Times Of Payment"</span><span class="ot">=</span>n,<span class="st">"Median, $"</span> <span class="ot">=</span> median,<span class="st">"Total Amount Of Payment, $"</span> <span class="ot">=</span> sum,<span class="st">"Min, $"</span><span class="ot">=</span>min,<span class="st">"Mean, $"</span><span class="ot">=</span>mean, <span class="st">"IQR, $"</span><span class="ot">=</span>IQR,<span class="st">"Max, $"</span><span class="ot">=</span>max,)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>all_analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Total Amount Of Payment, $ Min, $ IQR, $  Mean, $ Median, $  Max, $
+1                  163878573   0.01   83.4 2158.882     21.84 8057037
+  Times Of Payment
+1            75909</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dentist_specialty_analysis <span class="ot">&lt;-</span> dentist <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_specialty_1<span class="sc">!=</span><span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(covered_recipient_specialty_1)<span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">IQR =</span> <span class="fu">IQR</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())<span class="sc">|&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Times Of Payment"</span><span class="ot">=</span>n,<span class="st">"Covered Recipient Specialty"</span> <span class="ot">=</span> covered_recipient_specialty_1,<span class="st">"Total Amount Of Payment, $"</span> <span class="ot">=</span> sum,<span class="st">"Min, $"</span><span class="ot">=</span>min,<span class="st">"Median, $"</span><span class="ot">=</span>median, <span class="st">"IQR, $"</span><span class="ot">=</span>IQR,<span class="st">"Max, $"</span><span class="ot">=</span>max,)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>dentist_specialty_analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 7
+   `Covered Recipient Specialty` Total…¹ Min, …² IQR, …³ Media…⁴ Max, …⁵ Times…⁶
+   &lt;chr&gt;                           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+ 1 Allopathic &amp; Osteopathic Phy…  1.09e2   50     4.32e0    54.3  5.86e1       2
+ 2 Allopathic &amp; Osteopathic Phy…  1.39e2   15.8   5.34e1    69.3  1.23e2       2
+ 3 Allopathic &amp; Osteopathic Phy…  6.32e4  244.    1.13e4  1250    3.6 e4       7
+ 4 Allopathic &amp; Osteopathic Phy…  9.20e3   10.1   2.25e1    25    4.2 e3      39
+ 5 Allopathic &amp; Osteopathic Phy…  6.90e1   12.9   0         12.9  1.76e1       5
+ 6 Allopathic &amp; Osteopathic Phy…  6.56e1   65.6   0         65.6  6.56e1       1
+ 7 Allopathic &amp; Osteopathic Phy…  1.33e2  133.    0        133.   1.33e2       1
+ 8 Dental Providers|Dental Hygi…  1.19e2  119     0        119    1.19e2       1
+ 9 Dental Providers|Dentist       1.45e5    0.45  5.82e1    42.8  1.13e4    1584
+10 Dental Providers|Dentist|Den…  1.54e3    6.77  6.38e1    60.8  2.25e2      24
+11 Dental Providers|Dentist|Den…  4.2 e3 4200     0       4200    4.2 e3       1
+12 Dental Providers|Dentist|End…  1.21e6    8.26  1.59e3    39.8  1.09e5     102
+13 Dental Providers|Dentist|Gen…  2.05e5    0.65  7.35e1    37.5  7   e3    1979
+14 Dental Providers|Dentist|Ora…  2.79e2   20.0   2.67e1    25.9  6.88e1       8
+15 Dental Providers|Dentist|Ora…  6.95e4    2.13  5.55e1    31.3  1.5 e4     334
+16 Dental Providers|Dentist|Ort…  2.96e4    2.25  7.21e1    48.5  3   e3     322
+17 Dental Providers|Dentist|Ped…  6.51e3    8.02  5.52e1    40    1.8 e3      73
+18 Dental Providers|Dentist|Per…  8.76e4    2.99  5.20e1    37.5  2   e4     405
+19 Dental Providers|Dentist|Pro…  5.08e4    0.5   4.51e1    25    1.13e4     275
+# … with abbreviated variable names ¹​`Total Amount Of Payment, $`, ²​`Min, $`,
+#   ³​`IQR, $`, ⁴​`Median, $`, ⁵​`Max, $`, ⁶​`Times Of Payment`</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dentist, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(covered_recipient_specialty_1,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                              total_amount_of_payment_usdollars,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                              median,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">decreasing =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y=</span>total_amount_of_payment_usdollars))<span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>form_of_payment_or_transfer_of_value)<span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>dollar)<span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()<span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relationship Between Dentists' Specialty and Total Amount of Payment"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Covered Recipient Specialty"</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Amount Of Payment, $"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data_analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>covered_recipient_two <span class="ot">&lt;-</span> dentist<span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">covered_recipient_specialty_1 =</span> <span class="fu">case_when</span>(<span class="fu">grepl</span>(<span class="st">"Allopathic"</span>, covered_recipient_specialty_1)<span class="sc">~</span> <span class="st">"allopathic &amp; osteopathic physicians"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">"Dental Providers"</span>, covered_recipient_specialty_1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)<span class="sc">~</span> <span class="st">"dental providers"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covered_recipient_two, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(covered_recipient_specialty_1,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                              total_amount_of_payment_usdollars,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                              median,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">decreasing =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y=</span>total_amount_of_payment_usdollars))<span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#facet_wrap(~form_of_payment_or_transfer_of_value)+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>dollar)<span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()<span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relationship Between Dentists' Specialty And Total Amount Of Payment"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Covered Recipient Specialty"</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Amount Of Payment, $"</span>)<span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data_analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#states &lt;- map_data("state")</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(data=states) + </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_polygon(aes(x=long, y=lat, group=group), colour="black", fill='white', size=.2) +</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scale_fill_gradient2(low = "blue", mid="white", high = "red", name="total_amount_of_payment_usdollars")</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#coord_fixed(1.3) + theme_void()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>company_recipient <span class="ot">&lt;-</span> dentist <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum=</span><span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sum))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>company <span class="ot">&lt;-</span> dentist <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">IQR =</span> <span class="fu">IQR</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(total_amount_of_payment_usdollars),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())<span class="sc">|&gt;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sum))<span class="sc">|&gt;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Submitting Manufacturer Or GPO's Name"</span><span class="ot">=</span>submitting_applicable_manufacturer_or_applicable_gpo_name, </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Sum, $"</span><span class="ot">=</span>sum,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Min, $"</span><span class="ot">=</span>min,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">"IQR, $"</span><span class="ot">=</span>IQR,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Median, $"</span><span class="ot">=</span>median,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Max, $"</span><span class="ot">=</span>max,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Times Of Payment"</span><span class="ot">=</span>n)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>company</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 99 × 7
+   Submitting Manufacturer Or …¹ Sum, …² Min, …³ IQR, …⁴ Media…⁵ Max, …⁶ Times…⁷
+   &lt;chr&gt;                           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+ 1 Peter Brasseler Holdings, LLC  1.20e6   16.7  50427.  35421.  109432.      27
+ 2 Straumann USA LLC              9.91e4    2.13    25      25    20000      983
+ 3 Align Technology, Inc.         7.48e4    1.79    73.2    73.3   3604      833
+ 4 Zimmer Biomet Holdings, Inc.   7.36e4    3       25      75      505.     952
+ 5 Strategic Dentistry LLC        6.32e4  244.   11320.   1250    36000        7
+ 6 PATTERSON COMPANIES, INC.      5.75e4    4.7   1133.    150.    5500       81
+ 7 Ivoclar Vivadent, Inc.         4.51e4   13.3     85.0    99.4  11329       43
+ 8 A-dec, Inc.                    4.41e4    0.45   181.     66.5   2565      258
+ 9 Dentium Co., Ltd               3.20e4 2667.       0    2667.    2667.      12
+10 KLS-Martin L.P.                2.26e4  133.    1842.   7500     7500        4
+# … with 89 more rows, and abbreviated variable names
+#   ¹​`Submitting Manufacturer Or GPO's Name`, ²​`Sum, $`, ³​`Min, $`, ⁴​`IQR, $`,
+#   ⁵​`Median, $`, ⁶​`Max, $`, ⁷​`Times Of Payment`</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>top_recipient <span class="ot">&lt;-</span> dentist<span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(covered_recipient_full_name)<span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sum))<span class="sc">|&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>top_recipient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  covered_recipient_full_name     sum
+  &lt;chr&gt;                         &lt;dbl&gt;
+1 "ali a nasseh "             879232.
+2 "anne l koch "              326712.
+3 "leslie  fang "              63203.
+4 "myron  nevins "             39661.
+5 "paul  fugazzotto "          23532.
+6 "mohamed a hakim "           22500 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>company_recipient1 <span class="ot">&lt;-</span> dentist<span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(submitting_applicable_manufacturer_or_applicable_gpo_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Zimmer Biomet Holding, Inc."</span>, <span class="st">"Straumann USA LLC"</span>,<span class="st">"Strategic Dentistry LLC"</span>, <span class="st">"Peter Brasseler Holdings, LLC"</span>, <span class="st">"PATTERSON COMPANIES, INC."</span>,<span class="st">"Align Technology, Inc."</span>,<span class="st">" Ivoclar Vivadent, Inc."</span>,<span class="st">"A-dec, Inc."</span>,<span class="st">"Dentium Co., Ltd"</span>,<span class="st">"KLS-Martin L.P."</span>))<span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(covered_recipient_full_name,total_amount_of_payment_usdollars,submitting_applicable_manufacturer_or_applicable_gpo_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ali_a_nasseh<span class="ot">&lt;-</span>company_recipient1<span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_full_name <span class="sc">==</span> <span class="st">"ali a nasseh "</span>)<span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">physician_name=</span><span class="st">"Ali A Nasseh"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>anne_l_koch<span class="ot">&lt;-</span>company_recipient1<span class="sc">|&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_full_name <span class="sc">==</span> <span class="st">"anne l koch "</span><span class="sc">|</span>covered_recipient_full_name <span class="sc">==</span> <span class="st">"anne koch "</span>)<span class="sc">|&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">physician_name=</span><span class="st">"Anne L Koch"</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>leslie_fang<span class="ot">&lt;-</span>company_recipient1<span class="sc">|&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_full_name <span class="sc">==</span> <span class="st">"leslie  fang "</span>)<span class="sc">|&gt;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">physician_name=</span><span class="st">"Leslie Fang"</span>)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>myron_nevins<span class="ot">&lt;-</span>company_recipient1<span class="sc">|&gt;</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_full_name <span class="sc">==</span> <span class="st">"myron  nevins "</span>)<span class="sc">|&gt;</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">physician_name=</span><span class="st">"Myron Nevins"</span>)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>paul_fugazzotto<span class="ot">&lt;-</span>company_recipient1<span class="sc">|&gt;</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_full_name <span class="sc">==</span> <span class="st">"paul  fugazzotto "</span>)<span class="sc">|&gt;</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">physician_name=</span><span class="st">"Paul Fugazzotto"</span>)</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>mohamed_a_hakim<span class="ot">&lt;-</span>company_recipient1<span class="sc">|&gt;</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(covered_recipient_full_name <span class="sc">==</span> <span class="st">"mohamed a hakim "</span>)<span class="sc">|&gt;</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(submitting_applicable_manufacturer_or_applicable_gpo_name)<span class="sc">|&gt;</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">physician_name=</span><span class="st">"Mohamed A Hakim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>company_recipient2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ali_a_nasseh,anne_l_koch,leslie_fang,myron_nevins,paul_fugazzotto,mohamed_a_hakim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(company_recipient2, <span class="fu">aes</span>(<span class="at">x =</span> physician_name, <span class="at">y =</span> submitting_applicable_manufacturer_or_applicable_gpo_name,<span class="at">size=</span>sum))<span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>()<span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Dentists-Industry Financial Relationship"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Physicians"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Drug And Device Companies"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Sum Payments, $"</span>)<span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data_analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dentist_nature <span class="ot">&lt;-</span> dentist <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_amount_of_payment_usdollars, nature_of_payment_or_transfer_of_value)<span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(nature_of_payment_or_transfer_of_value)<span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sum))<span class="sc">|&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nature_of_payment_or_transfer_of_value,sum,count)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rename("Sum payments, $" = sum,</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>         <span class="co">#"Payment type"=nature_of_payment_or_transfer_of_value)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dentist_nature_zoom <span class="ot">&lt;-</span> dentist_nature[dentist_nature<span class="sc">$</span>sum <span class="sc">&lt;=</span> <span class="dv">1200000</span>, ]        </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dentist_nature_zoom<span class="sc">$</span>zoom <span class="ot">&lt;-</span> <span class="st">"zoom"</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>dentist_nature_extended <span class="ot">&lt;-</span> dentist_nature</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>dentist_nature_extended<span class="sc">$</span>zoom <span class="ot">&lt;-</span> <span class="st">"all"</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>dentist_nature_extended <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dentist_nature_extended, dentist_nature_zoom)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>dentist_nature_extended_filter <span class="ot">&lt;-</span> dentist_nature_extended<span class="sc">|&gt;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(zoom <span class="sc">==</span> <span class="st">"zoom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>my.labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Royalty or License"</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Gift"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Food and Beverage"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Honoraria"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Education"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Compensation-certified</span><span class="sc">\n</span><span class="st"> continuing program"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Charitable Contribution"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Consulting fee"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Grant"</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Compensation-non-accredited program"</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Compensation-other venues"</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Travel and Lodging"</span>,</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Entertainment"</span>) </span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dentist_nature_extended, </span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(nature_of_payment_or_transfer_of_value, sum, <span class="at">.desc =</span> <span class="cn">TRUE</span>), <span class="at">y =</span> sum, <span class="at">fill =</span> count))<span class="sc">+</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span> my.labels)<span class="sc">+</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relationship Between Dentists' Paid Money And Nature Of Payment Or Transfer Of Value"</span>,</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Payment Type"</span>,</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Number Of Payments"</span>,</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sum Payments, $"</span>)<span class="sc">+</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))<span class="sc">+</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))<span class="sc">+</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> zoom, <span class="at">scales =</span> <span class="st">"free_x"</span>,<span class="at">nrow =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data_analysis_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(axis.text.y =element_blank(),</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">#axis.ticks.y = element_blank())+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme(legend.position = "bottom")+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#guides(fill = guide_colorbar(barwidth = 10, barheight = 0.5))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>date<span class="ot">&lt;-</span> dentist<span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date_of_payment)<span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum=</span><span class="fu">sum</span>(total_amount_of_payment_usdollars))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(date, <span class="fu">aes</span>(<span class="at">x=</span>date_of_payment, <span class="at">y=</span>sum)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Payment In 2022 "</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"date of payment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data_analysis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dentist <span class="ot">&lt;-</span> dentist<span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">recipient_city =</span> <span class="fu">tolower</span>(recipient_city))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>num<span class="ot">&lt;-</span>dentist<span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(recipient_city)<span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>(),<span class="at">sum =</span> <span class="fu">sum</span>(total_amount_of_payment_usdollars))<span class="sc">|&gt;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sum))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>num_top<span class="ot">&lt;-</span>num<span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(recipient_city,sum)<span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(USAboundaries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>map<span class="ot">&lt;-</span><span class="fu">tibble</span>(<span class="at">recipient_city =</span> <span class="fu">c</span>(<span class="st">"Boston"</span>, <span class="st">"West Yarmouth"</span>,<span class="st">"Cambridge"</span>,<span class="st">"Swampscott"</span>,<span class="st">"Milton"</span>,<span class="st">"Revere"</span>),</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">sum =</span> <span class="fu">c</span>(<span class="st">"1051149.08"</span>, <span class="st">"326774.44"</span>,<span class="st">"70231.09"</span>,<span class="st">"41380.15"</span>,<span class="st">"25416.10"</span>,<span class="st">"19276.42"</span>),</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">lng =</span> <span class="fu">c</span>(<span class="st">"-71.06051"</span>,<span class="st">"-70.24113"</span>,<span class="st">"-71.10562"</span>,<span class="st">"-70.91715"</span>,<span class="st">"-71.06557"</span>,<span class="st">"-71.01199"</span>),</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">lan =</span> <span class="fu">c</span>(<span class="st">"42.35543"</span>,<span class="st">"41.65011"</span>,<span class="st">"42.37510"</span>,<span class="st">"42.46992"</span>,<span class="st">"42.25014"</span>,<span class="st">"42.40843"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>map_sf <span class="ot">&lt;-</span> map <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"lng"</span>, <span class="st">"lan"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>map_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 2 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -71.10562 ymin: 41.65011 xmax: -70.24113 ymax: 42.46992
+Geodetic CRS:  WGS 84
+# A tibble: 6 × 3
+  recipient_city sum                    geometry
+* &lt;chr&gt;          &lt;chr&gt;               &lt;POINT [°]&gt;
+1 Boston         1051149.08 (-71.06051 42.35543)
+2 West Yarmouth  326774.44  (-70.24113 41.65011)
+3 Cambridge      70231.09    (-71.10562 42.3751)
+4 Swampscott     41380.15   (-70.91715 42.46992)
+5 Milton         25416.10   (-71.06557 42.25014)
+6 Revere         19276.42   (-71.01199 42.40843)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain a map of Massachusetts counties from the USAboundaries package</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>MA_counties <span class="ot">&lt;-</span> </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  USAboundaries<span class="sc">::</span><span class="fu">us_counties</span>(<span class="at">resolution =</span> <span class="st">"low"</span>, <span class="at">states =</span> <span class="fu">c</span>(<span class="st">"massachusetts"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>state_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> MA_counties) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> map_sf, <span class="fu">aes</span>(<span class="at">color =</span> sum)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data_analysis_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>map_sf<span class="sc">$</span>sum <span class="ot">=</span> <span class="fu">as.numeric</span>(map_sf<span class="sc">$</span>sum)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(map_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 6
+Columns: 3
+$ recipient_city &lt;chr&gt; "Boston", "West Yarmouth", "Cambridge", "Swampscott", "…
+$ sum            &lt;dbl&gt; 1051149.08, 326774.44, 70231.09, 41380.15, 25416.10, 19…
+$ geometry       &lt;POINT [°]&gt; POINT (-71.06051 42.35543), POINT (-70.24113 41.6…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>map_pal <span class="ot">&lt;-</span> <span class="fu">colorNumeric</span>(<span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">domain =</span> map_sf<span class="sc">|&gt;</span> <span class="fu">pull</span>(sum))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>()<span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>()<span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircles</span>(<span class="at">data =</span> map_sf,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="sc">~</span> <span class="fu">map_pal</span>(sum),</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">radius =</span> <span class="dv">4000</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">weight =</span> <span class="dv">5</span>,</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">fillOpacity =</span> <span class="fl">0.5</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>             )<span class="sc">|&gt;</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>, <span class="at">pal =</span> map_pal, <span class="at">values =</span> map_sf<span class="sc">$</span>sum, <span class="at">title =</span> <span class="st">"Sum Payments, $"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-458a7876909581f3dc7c" style="width:100%;height:464px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-458a7876909581f3dc7c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircles","args":[[42.35543,41.65011,42.3751,42.46992,42.25014,42.40843],[-71.06051,-70.24113,-71.10562,-70.91715,-71.06557,-71.01199],4000,null,null,{"interactive":true,"className":"","stroke":true,"color":["#313695","#FDAD60","#BD1C27","#B00E26","#A80426","#A50026"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#313695","#FDAD60","#BD1C27","#B00E26","#A80426","#A50026"],"fillOpacity":0.5},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addLegend","args":[{"colors":["#A50026 , #ED603C 17.5141359012264%, #FFD181 36.8963724651838%, #EDF7E3 56.2786090291412%, #8CC0DB 75.6608455930987%, #3D55A4 95.0430821570561%, #313695 "],"labels":["200,000","400,000","600,000","800,000","1,000,000"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"bottomleft","type":"numeric","title":"Sum Payments, $","extra":{"p_1":0.175141359012264,"p_n":0.950430821570561},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[41.65011,42.46992],"lng":[-71.10562,-70.24113]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
